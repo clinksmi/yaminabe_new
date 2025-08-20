@@ -34,8 +34,8 @@ export interface Character {
       name: 'キラキラ星のタロウ', // nameも「文字」だね
       catchphrase: 'みんなに笑顔を届けたい！', // catchphraseも「文字」
       description: 'いつも明るく元気な男の子。困っている人がいたら放っておけない優しい心を持っているよ。歌とダンスが大好き！', // descriptionも「文字」
-      // image: '/images/char001-full.png', // まだ画像がなくても、設計図では「無くてもOK」にしてあるからエラーにならないよ
-      // thumbnail: '/images/char001-face.png',
+       image: '/images/hayato01.png', // まだ画像がなくても、設計図では「無くてもOK」にしてあるからエラーにならないよ
+       thumbnail: '/images/hayato02.png',
     },
     // もし、もう一人キャラクターがいるなら、こんな風にカンマで区切って追加していくんだ
     // {
