@@ -1,47 +1,119 @@
 // data/characters.ts
 
-// ここで、キャラクター一人の情報の「設計図」を作ろう！
-// これを「インターフェース (interface)」って呼ぶんだ。
-// 「Character」っていう名前の自己紹介カードは、こんな項目を持ってて、こんな種類の情報が入るよ！って決めるんだ。
 export interface Character {
-    id: string; // キャラクターの識別番号。これは「文字（string）」だよ
-    name: string; // キャラクターの名前も「文字（string）」だよ
-    catchphrase: string; // 一言紹介も「文字（string）」だよ
-    description: string; // 性格や特徴も「文字（string）」だよ
-    // 「?」がついている項目は、今は無くてもOKだよ、って意味だよ。
-    // 後で画像を用意するときに使うから、先に入れておこうね。
-    image?: string; // 全身イラストの場所（今は無くてもOK）
-    thumbnail?: string; // サムネイルイラストの場所（今は無くてもOK）
-  
-    // 他にも「サイトに載せたいキャラクター情報」の項目を、ここに型として追加していけるよ！
-    // 例:
-    // height?: string;    // 身長は「文字」でいいかな？
-    // birthday?: string;  // 誕生日も「文字」でいいかな？
-    // likes?: string[];   // 好きなものは複数あるかもしれないから、「文字のリスト（配列）」にするよ
-    // dislikes?: string[]; // 苦手なものも「文字のリスト」にするよ
-    // specialSkill?: string; // 特技は「文字」かな
-    // catchphrase?: string; // 口癖も「文字」
-    // origin?: string; // 出身地も「文字」
-    // relatedCharacters?: string[]; // 関連キャラクターは「キャラクターIDのリスト」にする？
-  }
-  
-  // これは、キャラクターの情報をたくさん入れる箱だよ
-  // この箱の中には、「Character」っていう設計図に合った自己紹介カードだけが入るよ！ってことを教えてあげるんだ。
-  // 「: Character[]」が「Characterの設計図に合うカードのリストだよ」っていう意味なんだ。
-  export const characters: Character[] = [
-    {
-      id: 'char001', // idはさっき決めた設計図通り「文字」だね
-      name: 'キラキラ星のタロウ', // nameも「文字」だね
-      catchphrase: 'みんなに笑顔を届けたい！', // catchphraseも「文字」
-      description: 'いつも明るく元気な男の子。困っている人がいたら放っておけない優しい心を持っているよ。歌とダンスが大好き！', // descriptionも「文字」
-       image: '/images/hayato01.png', // まだ画像がなくても、設計図では「無くてもOK」にしてあるからエラーにならないよ
-       thumbnail: '/images/hayato02.png',
-    },
-    // もし、もう一人キャラクターがいるなら、こんな風にカンマで区切って追加していくんだ
-    // {
-    //   id: 'char002',
-    //   name: 'ふしぎな森のハナ',
-    //   catchphrase: '森の秘密は私の心の中',
-    //   description: '物静かで、ちょっぴり恥ずかしがり屋の女の子。動物たちと話すことができる不思議な力を持っている。',
-    // },
-  ];
+  id: string;
+  name: string;
+  catchphrase: string; // キャッチコピー/一言紹介
+  description: string; // 性格や特徴のまとめ（キャラクター説明文）
+  image?: string; // 全身立ち絵
+  thumbnail?: string; // 顔グラ（一覧用）
+  // ★ここから新しい項目を追加するよ！
+  gender?: '男性' | '女性' | '不明' | 'その他';
+  occupation?: string; // 職業
+  birthday?: string; // 誕生日 (例: '05/05' の形式で)
+  age?: number | '不明'; // 年齢（数字）または「不明」
+  colorcode?: string; // カラーコード（キャラクターの色を表すコード）
+  height?: string; // 身長 (例: '175cm')
+  weight?: string; // 体重 (例: '65kg')
+  likes?: string[]; // 好きなもの/こと (例: ['歌', 'ダンス', '甘いもの'])
+  dislikes?: string[]; // 苦手なもの/こと (例: ['お昼寝', '怖い話'])
+  specialSkill?: string; // 特技/能力
+  quirk?: string; // 一人称
+  origin?: string; // 出身地/生い立ち (※クリックで表示される形式も検討)
+  relatedCharacters?: string[]; // 関連キャラクターのIDリスト (例: ['char002'])
+  appearingWorks?: string; // 登場作品 (例: 'オリジナル小説「夜鍋物語」')
+  trivia?: string; // 豆知識/裏話 (※クリックで表示される形式（タブ、アコーディオンなど）)
+  expressions?: { // 表情差分（複数可）
+    name: string; // 表情の名前 (例: '笑顔', '怒り', '驚き')
+    src: string;  // 画像のパス (例: '/images/char001-smile.png')
+  }[]; // 複数の表情差分を持つリストだよ
+  // ★ここまで追加だよ！
+}
+
+// 次に、既存のキャラクターデータにも、これらの新しい情報を追加していこう！
+// 自分で作ったキャラクターに合わせて、情報を埋めてみてね！
+export const characters: Character[] = [
+  {
+    id: 'char001',
+    name: '高槻 隼人（たかつき はやと）',
+    catchphrase: '「演劇だけが、退屈な僕の世界を照らす光だったんだ。」',
+    description: '演劇が大好きな男の子。役者になるために、日々奮闘中。自分の過去も、現在も未来も不安だらけだ。それでも、悩みもがいた日々は決して無駄じゃない。それこそが、生きるということなのだから。「好き」という気持ちで前に進んだ彼の瞳には、もう迷いなど映らないだろう。',
+    image: '/images/hayato-tachie.png', // 全身立ち絵
+    thumbnail: '/images/hayato01.png', // 顔グラ
+    gender: '男性',
+    occupation: '俳優',
+    birthday: '05/05',
+    age: 17,
+    colorcode: ['#7aadc8'],
+    height: '176cm',
+    weight: '62kg',
+    likes: ['演劇'],
+    dislikes: ['???????'],
+    specialSkill: 'どんな時でも笑顔',
+    quirk: '僕',
+    origin: '遠い宇宙のキラキラ星から、笑顔を届けるために地球にやってきた。',
+    relatedCharacters: ['char002'], // ハナちゃんと関連があることにしてみよう
+    appearingWorks: 'キラキラ星物語',
+    trivia: '実は早起きが苦手で、朝はいつもふしぎな森のハナに起こしてもらっている。',
+    expressions: [ // 表情差分も追加してみよう！
+      { name: '通常', src: '/images/hayato-tachie.png' }, // 通常の立ち絵を最初の表情に
+      { name: '笑顔', src: '/images/hayato01.png' }, // 笑顔のイラストを準備してね
+      { name: '驚き', src: '/images/hayato02.png' }, // 驚きのイラストを準備してね
+    ],
+  },
+  {
+    id: 'char002',
+    name: 'ふしぎな森のハナ',
+    catchphrase: '森の秘密は私の心の中',
+    description: '物静かで、ちょっぴり恥ずかしがり屋の女の子。動物たちと話すことができる不思議な力を持っている。',
+    image: '/images/char002-full.png',
+    thumbnail: '/images/char002-face.png',
+    gender: '女性',
+    occupation: '森の守り人',
+    birthday: '08/10',
+    age: 16,
+    height: '145cm',
+    weight: '40kg',
+    likes: ['森の散歩', '小鳥のさえずり', 'ベリー'],
+    dislikes: ['大きな音', '人混み'],
+    specialSkill: '動物と会話',
+    quirk: '「しーっ、森が聞こえているよ」',
+    origin: '森の奥深くで生まれた。植物や動物たちに囲まれて育ったため、人間社会には疎い。',
+    relatedCharacters: ['char001'], // タロウくんと関連があることにしてみよう
+    appearingWorks: '森のささやき',
+    trivia: '実はキラキラ星のタロウの歌が大好きで、こっそり木陰で聞いている。',
+    expressions: [
+      { name: '通常', src: '/images/char002-full.png' },
+      { name: 'はにかみ', src: '/images/char002-shy.png' },
+    ],
+  },
+
+  {
+    id: 'char003',
+    name: 'ふしぎな森のハナ',
+    catchphrase: '森の秘密は私の心の中',
+    description: '物静かで、ちょっぴり恥ずかしがり屋の女の子。動物たちと話すことができる不思議な力を持っている。',
+    image: '/images/char002-full.png',
+    thumbnail: '/images/char002-face.png',
+    gender: '女性',
+    occupation: '森の守り人',
+    birthday: '08/10',
+    age: 16,
+    height: '145cm',
+    weight: '40kg',
+    likes: ['森の散歩', '小鳥のさえずり', 'ベリー'],
+    dislikes: ['大きな音', '人混み'],
+    specialSkill: '動物と会話',
+    quirk: '「しーっ、森が聞こえているよ」',
+    origin: '森の奥深くで生まれた。植物や動物たちに囲まれて育ったため、人間社会には疎い。',
+    relatedCharacters: ['char001'], // タロウくんと関連があることにしてみよう
+    appearingWorks: '森のささやき',
+    trivia: '実はキラキラ星のタロウの歌が大好きで、こっそり木陰で聞いている。',
+    expressions: [
+      { name: '通常', src: '/images/char002-full.png' },
+      { name: 'はにかみ', src: '/images/char002-shy.png' },
+    ],
+  },
+  // 他のキャラクターも、上記のように新しい項目に情報を追加してみてね！
+  // 特に表情差分の画像ファイルは、public/imagesフォルダにちゃんと置いてね！
+];
