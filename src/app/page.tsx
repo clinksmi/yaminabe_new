@@ -1,103 +1,72 @@
-import Image from "next/image";
+// src/app/page.tsx
 
-export default function Home() {
+'use client';
+
+// ★キャラクターデータとキャラクターの設計図をインポートするよ！
+import { Character, characters } from '../../data/characters';
+import Link from 'next/link';
+import Image from 'next/image';
+
+// ★ここに、キャラクターのリストからランダムに指定の数を取る魔法の関数を作るよ！
+const getRandomCharacters = (allCharacters: Character[], count: number): Character[] => {
+  // まずは、元のリストをコピーして、ごちゃ混ぜにする準備をするよ。
+  // `Math.random() - 0.5` を使うと、ランダムに並べ替えることができるんだ。
+  const shuffled = [...allCharacters].sort(() => 0.5 - Math.random());
+  // 並べ替えたリストの最初から、指定された数（count）だけ取り出すよ。
+  return shuffled.slice(0, count);
+};
+
+const HomePage = () => {
+  // ★ここでランダムなキャラクターを3人選ぶよ！
+  const randomCharacters = getRandomCharacters(characters, 3);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="container mx-auto p-4">
+      <section className="text-center my-8">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+          src="/images/image-kari.jpeg"
+          alt="サイトのメインビジュアル"
+          width={1920}
+          height={1080}
+          className="w-full h-80 md:h-96 lg:h-[500px] object-cover rounded-lg shadow-lg mb-8 mx-auto"
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+        <h1 className="text-5xl font-extrabold text-gray-800 mb-4">ようこそ、混沌の円卓へ。</h1>
+        <p className="text-xl text-gray-600 mb-8">
+          通りすがり探索者まとめサイト「やみなべ」です
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      {/* ★ここから、ランダムに選ばれたキャラクターを表示する部分を追加するよ！ */}
+      <h2 className="text-4xl font-bold text-center my-8">やみなべの仲間たち</h2>
+
+      {/* キャラクターカードのレイアウトは、前のキャラクター一覧ページと同じようにするよ */}
+      {/* ただし、ここでは常に3枚表示させたいので、横幅の指定を少し調整するね。 */}
+      <div className="flex flex-wrap justify-center gap-6 pb-8">
+        {/* mapするデータが characters から randomCharacters に変わるよ！ */}
+        {randomCharacters.map((character: Character) => (
+          <div key={character.id} className="w-full sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] bg-white border border-gray-200 rounded-lg shadow-md p-4 flex flex-col items-center text-center">
+            {character.thumbnail && (
+              <Image
+                src={character.thumbnail}
+                alt={`${character.name}のサムネイル`}
+                width={96}
+                height={96}
+                className="w-24 h-24 object-cover rounded-full mb-4 shadow-sm"
+              />
+            )}
+            <h3 className="text-xl font-semibold mb-2">{character.name}</h3>
+            {character.catchphrase && (
+              <p className="text-gray-600 text-sm italic mb-4">{character.catchphrase}</p>
+            )}
+            <p className="mt-auto text-blue-500 hover:underline">
+              <Link href={`/characters/${character.id}`}>詳細を見る</Link>
+            </p>
+          </div>
+        ))}
+        {/* ★ここまで追加だよ！ */}
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;
