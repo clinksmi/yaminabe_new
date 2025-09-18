@@ -153,7 +153,7 @@ const SearchPage = () => {
   // ここに各絞り込みタイプの選択肢を定義するんだ (キーはデータキー名にする！)
   const filterOptions: Record<string, string[]> = {
     'gender': ['男性', '女性', 'その他', '不明'], // キーを'gender'に変更
-    'occupation': ['アイドル見習い', '森の守り人', '見習い発明家', '生徒', '教師', '会社員', 'その他'], 
+    'occupation': ['俳優', 'ミュージシャン', 'ハルモロイド', '小学生', '高校生'], 
     'birthday': ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     'age': ['10代', '20代', '30代', '40代以上', '不明'], // キーを'age'に変更
   };
@@ -271,13 +271,14 @@ const SearchPage = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500 w-full">条件に合うキャラクターが見つかりませんでした。</p>
+        <p className="text-center text-gray-500 w-full">条件に合う子は見つからないみたい......。</p>
       )}
 
       {/* 並べ替えモーダル（ポップアップ） */}
       {isSortModalOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 flex items-center justify-center z-50 p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.15)' }}
           onClick={() => setIsSortModalOpen(false)}
         >
           <div
@@ -327,7 +328,8 @@ const SearchPage = () => {
       {/* 絞り込みモーダル（ポップアップ） */}
       {isFilterModalOpen && currentFilterKey && ( // currentFilterKeyがある時だけ表示
         <div
-          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 flex items-center justify-center z-50 p-4"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.15)' }}
           onClick={closeFilterModal} // 背景をクリックしたらモーダルが閉じる
         >
           <div

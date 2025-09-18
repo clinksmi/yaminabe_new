@@ -19,8 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja"> {/* 日本語サイトだよ、って意味だよ */}
-      <body>
+    <html lang="ja"><body>
         {/* ★ここからSidebarを配置するよ！ */}
         <Sidebar />
         {/* children（各ページの内容）を、Sidebarの隣に表示させるために、

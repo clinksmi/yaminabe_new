@@ -27,6 +27,11 @@ const Sidebar = () => {
             </Link>
           </li>
           <li>
+            <Link href="/line-log" className="block p-2 rounded hover:bg-gray-700 transition-colors">
+              ルームログ一覧
+            </Link>
+          </li>
+          <li>
             {/* まだ作ってないページだけど、とりあえずリンクだけ作っておこう！ */}
             <Link href="/gallery" className="block p-2 rounded hover:bg-gray-700 transition-colors">
               ギャラリー
