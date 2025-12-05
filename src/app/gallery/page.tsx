@@ -22,7 +22,7 @@ const GalleryPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center my-8">ギャラリーページ</h1>
+      <h1 className="text-4xl font-bold my-8 font-[family-name:var(--font-megrim)]" style={{ color: '#080eb4' }}>Gallery</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {galleryImages.map((image: GalleryImage) => (
@@ -47,7 +47,7 @@ const GalleryPage = () => {
 
       {isModalOpen && selectedImage && (
         <div
-          className="fixed inset-0 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 flex items-center justify-center z-50 p-4 min-h-screen"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.15)' }}
           onClick={closeModal}
         >

@@ -5,7 +5,7 @@ import path from 'path';
 import AnimatedMessage from '../../../../components/AnimatedMessage';
 
 // データを直接定義
-const characterLogData = {
+const characterLogData: Record<string, Array<{ id: string; title: string; filePath: string }>> = {
   hayato: [
     { id: 'episode1', title: 'エピソード1', filePath: '/line-logs/hayato/episode1.html' },
     { id: 'episode2', title: 'エピソード2', filePath: '/line-logs/hayato/episode2.html' },
@@ -28,10 +28,10 @@ const characterLogData = {
 };
 
 interface LogPageProps {
-  params: {
+  params: Promise<{
     characterName: string;
     logId: string;
-  };
+  }>;
 }
 
 export default async function LogPage({ params }: LogPageProps) {
@@ -95,7 +95,7 @@ export default async function LogPage({ params }: LogPageProps) {
           const displaySpeaker = speaker && speaker.trim() !== '' ? speaker : '　　';
           
           // <br>タグを改行に置換し、その他のHTMLタグを除去
-          let cleanContent = content
+          const cleanContent = content
             .replace(/<br\s*\/?>/gi, '\n')  // <br>を改行に置換
             .replace(/<[^>]*>/g, '')        // その他のHTMLタグを除去
             .replace(/\s+/g, ' ')           // 連続する空白を1つに

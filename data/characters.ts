@@ -27,6 +27,10 @@ export interface Character {
     name: string; // 表情の名前 (例: '笑顔', '怒り', '驚き')
     src: string;  // 画像のパス (例: '/images/char001-smile.png')
   }[]; // 複数の表情差分を持つリストだよ
+  stats?: { // レーダーチャート用のステータス
+    label: string; // ステータス名 (例: 'STR', 'DEX', 'INT')
+    value: number; // 0-10の値
+  }[];
   // ★ここまで追加だよ！
 }
 
@@ -126,6 +130,15 @@ SAN：57→59
       { name: '泣き', src: '/images/hayato/7.png' }, 
       { name: '照れ', src: '/images/hayato/8.png' }, 
     ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
+    ],
   },
   {
     id: 'char002',
@@ -220,6 +233,15 @@ SAN：57→59
       { name: '????', src: '/images/sion/6.png' },
       { name: '今', src: '/images/sion/7.png' },
     ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
+    ],
   },
 
   {
@@ -252,6 +274,15 @@ SAN：57→59
       { name: '本当', src: '/images/miku/5.png' },
       { name: '幸福', src: '/images/miku/6.png' }
     ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
+    ],
   },
 
   {
@@ -283,6 +314,15 @@ SAN：57→59
       { name: '立ち絵失敗', src: '/images/if/5.png' },
       { name: '立ち絵笑顔', src: '/images/if/6.png' }
     ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
+    ],
   },
 
 
@@ -313,6 +353,15 @@ SAN：57→59
       { name: '立ち絵通常', src: '/images/noel/3.png' },
       { name: '立ち絵歌う', src: '/images/noel/4.png' },
       { name: '立ち絵失敗', src: '/images/noel/5.png' },
+    ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
     ],
   },
 
@@ -370,6 +419,15 @@ SAN8→23
       { name: '驚き', src: '/images/reiya/odoroki.png' },
       { name: '無', src: '/images/reiya/mu.png' },
       { name: '???', src: '/images/reiya/nanndaroune.png' },
+    ],
+    stats: [
+      { label: 'STR', value: 7.0 },
+      { label: 'CON', value: 7.0 },
+      { label: 'POW', value: 7.0 },
+      { label: 'DEX', value: 7.0 },
+      { label: 'APP', value: 7.0 },
+      { label: 'SIZ', value: 7.0 },
+      { label: 'INT', value: 7.0 },
     ],
   },
   // 他のキャラクターも、上記のように新しい項目に情報を追加してみてね！

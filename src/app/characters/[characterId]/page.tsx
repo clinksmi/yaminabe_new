@@ -2,11 +2,12 @@
 
 import { characters } from '../../../../data/characters';
 import CharacterClient from '../../../components/CharacterClient';
+import Link from 'next/link';
 
 interface CharacterPageProps {
-  params: {
+  params: Promise<{
     characterId: string;
-  };
+  }>;
 }
 
 const CharacterPage = async ({ params }: CharacterPageProps) => {
@@ -18,8 +19,10 @@ const CharacterPage = async ({ params }: CharacterPageProps) => {
       <div className="container mx-auto p-8 text-center">
         <h1 className="text-3xl font-bold text-red-600">キャラクターが見つかりません...</h1>
         <p className="mt-4">ごめんね、そのIDのキャラクターはまだ登録されていないみたいだよ。</p>
-        <p className="mt-8 text-blue-500 hover:underline">
-          <a href="/characters">一覧ページに戻る</a>
+        <p className="mt-8">
+          <Link href="/characters" className="text-blue-500 hover:underline">
+            一覧ページに戻る
+          </Link>
         </p>
       </div>
     );

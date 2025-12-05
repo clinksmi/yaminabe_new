@@ -82,50 +82,36 @@ const HomePage = () => {
     }
   }, []);
 
-  // ローディング画面を表示（初回訪問時またはリロード時のみ）
-  if (showLoading && !showContent) {
-    return (
-      <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-900 text-white z-50">
-        <div className="text-center">
-          {/* 両目がぱちぱちするアニメーション */}
-          <div className="mb-8">
-            <div className="eyes-container">
-              <div className="eye relative">
-                <div className="lid"></div>
-              </div>
-              <div className="eye relative">
-                <div className="lid"></div>
-              </div>
-            </div>
-          </div>
-          
-          {/* ようこそメッセージ */}
-          <div className="welcome-message">
-            <h1 className="text-4xl font-extrabold mb-4">ようこそ！</h1>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 overflow-hidden">
       <section className="text-center my-8">
         <Image
           src="/images/image-kari.jpeg"
           alt="サイトのメインビジュアル"
           width={1920}
           height={1080}
-          className="w-full h-80 md:h-96 lg:h-[500px] object-cover rounded-lg shadow-lg mb-8 mx-auto"
+          className="w-full object-contain rounded-lg shadow-lg mb-8 mx-auto"
         />
-        <h1 className="text-5xl font-extrabold text-gray-800 mb-4">ようこそ、混沌の円卓へ。</h1>
-        <p className="text-xl text-gray-600 mb-8">
-          通りすがり探索者まとめサイト「やみなべ」です
+        <h1 className="text-5xl font-extrabold text-gray-800 mb-4 font-[family-name:var(--font-megrim)]">
+          ようこそ、混沌の円卓へ。
+        </h1>
+        <p className="text-xl text-gray-600 mb-8 font-[family-name:var(--font-megrim)]">
+          通りすがり探索者まとめサイト「やみなべっ！」です
         </p>
+        <Image
+          src="/rogo/chaos-yaminabe-logo.png"
+          alt="やみなべロゴ"
+          width={200} // 適切な幅を設定してください
+          height={200} // 適切な高さを設定してください
+          className="mx-auto mb-8"
+        />
       </section>
 
       {/* ★ここから、ランダムに選ばれたキャラクターを表示する部分を追加するよ！ */}
-      <h2 className="text-4xl font-bold text-center my-8">やみなべの仲間たち</h2>
+      <h2 className="text-4xl font-bold text-center my-8 font-[family-name:var(--font-megrim)]">
+        やみなべの仲間たち
+      </h2>
 
       {/* キャラクターカードのレイアウトは、前のキャラクター一覧ページと同じようにするよ */}
       {/* ただし、ここでは常に3枚表示させたいので、横幅の指定を少し調整するね。 */}

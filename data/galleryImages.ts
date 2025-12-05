@@ -13,22 +13,29 @@ export interface GalleryImage {
   export const galleryImages: GalleryImage[] = [
     {
       id: 'gal001',
-      src: '/gallery/01.png', // ★君が置いたパスとファイル名に合わせてね！
-      alt: '仮置き',
-      width: 1200, // 例: 画像の実際の幅
-      height: 800, // 例: 画像の実際の高さ
+      src: '/gallery/hutae.jpeg', // ★君が置いたパスとファイル名に合わせてね！
+      alt: 'サイトトップ画像',
+      width: 1920, // 例: 画像の実際の幅
+      height: 1080, // 例: 画像の実際の高さ
     },
     {
       id: 'gal002',
-      src: '/gallery/02.png',
-      alt: '仮置き',
+      src: '/gallery/01.png',
+      alt: '志海未來',
       width: 600,
       height: 900, // これは縦長の画像の例
     },
     {
       id: 'gal003',
-      src: '/gallery/03.jpeg',
-      alt: '仮置き',
+      src: '/gallery/02.jpeg',
+      alt: '高槻隼人「ずうっといっしょ！」パロ',
+      width: 1000,
+      height: 750,
+    },
+    {
+      id: 'gal004',
+      src: '/gallery/03.png',
+      alt: '舞台の上',
       width: 1000,
       height: 750,
     },

@@ -8,8 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-zen-kaku), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
+  --font-megrim: var(--font-megrim), cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,9 +21,17 @@
 }
 
 body {
-  background: var(--background);
+  /* 背景画像を置き換え */
+  background: url('/images/haikei/02.png') no-repeat center center fixed;
+  background-size: cover;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* フォントはlayout.tsxで設定されたNoto Sans JPが適用されます */
+}
+
+/* 背景のぼかし効果 */
+.backdrop-blur-custom {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5); /* ぼかし効果を見やすくするために半透明の背景色を追加 */
 }
 
 /* 吹き出しアニメーション */
@@ -230,4 +239,194 @@ body {
 .animate-bounce-delay-3 {
   animation: bounce-delay-3 1.4s infinite;
   animation-delay: 0.4s;
+}
+
+/* ニューモーフィズムボタンスタイル */
+.button-neomorphism {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 2em;
+  border: 1px solid #e7e7e7;
+  border-radius: 25px;
+  box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #fff;
+  background-color: #e7e7e7;
+  color: #080eb4;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.button-neomorphism:hover {
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #fff;
+}
+
+.button-neomorphism-active {
+  box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #fff;
+  background-color: #e7e7e7;
+  color: #080eb4;
+}
+
+/* トップへ戻るボタンスタイル */
+.button-20 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: #080eb4;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-20:hover {
+  border: 1px solid #080eb4;
+  background-color: #fff;
+}
+
+.button-20:hover path {
+  fill: #080eb4;
+}
+
+/* アコーディオンメニュースタイル */
+.accordion-007 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.accordion-007 summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 1em 2em;
+  border: 2px solid #080eb4;
+  border-radius: 5px;
+  color: #080eb4;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion-007 summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-007 summary::after {
+  transform: translateY(-25%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  border-bottom: 3px solid #080eb4;
+  border-right: 3px solid #080eb4;
+  content: '';
+  transition: transform .3s;
+}
+
+.accordion-007[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.accordion-007 .accordion-content {
+  position: relative;
+  transform: translateY(-10px);
+  opacity: 0;
+  margin-top: 20px;
+  padding: .8em 1.2em;
+  border: 2px solid #080eb4;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333333;
+  transition: transform .5s, opacity .5s;
+}
+
+.accordion-007[open] .accordion-content {
+  transform: none;
+  opacity: 1;
+}
+
+.accordion-007 .accordion-content::before,
+.accordion-007 .accordion-content::after {
+  position: absolute;
+  top: -15px;
+  left: 1.2em;
+  width: 30px;
+  height: 15px;
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  content: '';
+}
+
+.accordion-007 .accordion-content::before {
+  background-color: #080eb4;
+}
+
+.accordion-007 .accordion-content::after {
+  top: -12px;
+  background-color: #fff;
+}
+
+/* フッタースタイル */
+.footer-001 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px 10px 10px;
+  background-color: #e7e7e7;
+}
+
+.footer-001__logo {
+  width: 130px;
+  height: auto;
+  margin-bottom: 1em;
+}
+
+.footer-001__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 1.5em;
+  list-style-type: none;
+  margin: 0 0 .5em;
+  padding: .5em;
+  flex-wrap: wrap;
+}
+
+.footer-001__link {
+  color: #080eb4;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.footer-001__link:hover {
+  opacity: 0.7;
+}
+
+.footer-001__copyright {
+  margin: 0;
+  color: #080eb4;
+  font-weight: 200;
+  font-size: .8em;
+  opacity: 0.7;
+}
+
+/* レーダーチャートスタイル */
+.radar-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* キャラクター詳細ページ用カスタムカラー */
+.border-custom-blue {
+  border-color: #080eb4;
+}
+
+.text-custom-blue {
+  color: #080eb4;
 }

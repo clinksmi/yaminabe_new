@@ -95,7 +95,14 @@ const SearchPage = () => {
           return false; 
         }
         // その他の文字列フィルター（gender, occupation）は、直接一致するか確認
-        return (char as any)[filterKey] === filterValue;
+               // その他の文字列フィルター（gender, occupation）
+               if (filterKey === 'gender') {
+                return char.gender === filterValue;
+              }
+              if (filterKey === 'occupation') {
+                return char.occupation === filterValue;
+              }
+              return false;
       });
     }
     // 後で「好きなもの」のように複数選択可能なフィルターの場合は、Array.isArray(filterValue) で分岐するよ
@@ -183,7 +190,7 @@ const SearchPage = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold text-center my-8">検索ページ</h1>
+      <h1 className="text-4xl font-bold my-8 font-[family-name:var(--font-megrim)]" style={{ color: '#080eb4' }}>Search</h1>
 
       <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
         {/* 検索窓と並べ替えボタンのエリア */}
@@ -241,7 +248,7 @@ const SearchPage = () => {
       </div>
 
       {/* キャラクターたちがソートされて表示されるエリア */}
-      <h2 className="text-2xl font-bold text-center my-8">キャラクター一覧</h2>
+      <h2 className="text-2xl font-bold my-8" style={{ color: '#080eb4' }}>Character List</h2>
       {displayedCharacters.length > 0 ? (
         // ★ここを、以前使っていたシンプルなgridレイアウトに戻すよ！
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-8">

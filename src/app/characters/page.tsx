@@ -83,15 +83,14 @@ const CharactersListPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-gray-50 flex overflow-hidden fixed inset-0">
+    <div className="bg-transparent flex flex-col h-full">
       {/* サイドバー */}
-      <Sidebar />
       
       {/* メインコンテンツエリア */}
-      <div className="flex-1 flex flex-col ml-64">
+      <div className="flex-1 flex flex-col">
         {/* ヘッダー部分 */}
         <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
-          <h1 className="text-2xl font-bold text-gray-800">キャラクター一覧</h1>
+          <h1 className="text-4xl font-bold font-[family-name:var(--font-megrim)]" style={{ color: '#080eb4' }}>Character</h1>
         </div>
 
         {/* カルーセルエリア - サイドバーを考慮した中央配置 */}

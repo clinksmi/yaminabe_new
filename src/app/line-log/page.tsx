@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import SpoilerWarningModal from '../../components/SpoilerWarningModal';
@@ -26,6 +26,11 @@ const characterLogData = {
     { id: '2', title: 'シオンのログ2', filePath: '/line-logs/shion/2.html' },
     { id: 'youandi', title: 'ログ', filePath: '/line-logs/shion/youandi.html' },
   ],
+} as const;
+
+// 型ガード関数（安全にキーかどうかチェックする魔法の関数！）
+const isValidCharacterKey = (key: string | null): key is keyof typeof characterLogData => {
+  return key !== null && key in characterLogData;
 };
 
 // HTMLファイルからタイトルを抽出する関数
@@ -100,8 +105,8 @@ const extractTitleFromHTML = async (filePath: string): Promise<string> => {
   }
 };
 
-export default function LineLogPage() {
-  const [activeTab, setActiveTab] = useState('');
+function LineLogContent() {
+  const [activeTab, setActiveTab] = useState<keyof typeof characterLogData | ''>('');
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedLog, setSelectedLog] = useState<{characterName: string, logId: string, title: string} | null>(null);
   const [logTitles, setLogTitles] = useState<{[key: string]: string}>({});
@@ -111,10 +116,12 @@ export default function LineLogPage() {
     if (characterLogData && Object.keys(characterLogData).length > 0) {
       // URLパラメータからタブを取得
       const tabParam = searchParams.get('tab');
-      if (tabParam && characterLogData[tabParam]) {
+      // 型ガードを使って安全にチェック！🛡️
+      if (isValidCharacterKey(tabParam)) {
         setActiveTab(tabParam);
       } else {
-        setActiveTab(Object.keys(characterLogData)[0]);
+        // デフォルトは'hayato'を明示的に指定（安全！）🛡️
+        setActiveTab('hayato');
       }
     }
   }, [searchParams]);
@@ -125,10 +132,13 @@ export default function LineLogPage() {
       const titles: {[key: string]: string} = {};
       
       for (const characterName in characterLogData) {
-        for (const log of characterLogData[characterName]) {
-          const key = `${characterName}_${log.id}`;
-          const title = await extractTitleFromHTML(log.filePath);
-          titles[key] = title;
+        // 型ガードを使って安全にチェック！🛡️
+        if (isValidCharacterKey(characterName)) {
+          for (const log of characterLogData[characterName]) {
+            const key = `${characterName}_${log.id}`;
+            const title = await extractTitleFromHTML(log.filePath);
+            titles[key] = title;
+          }
         }
       }
       
@@ -156,7 +166,7 @@ export default function LineLogPage() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">ルームログ一覧</h1>
+      <h1 className="text-4xl font-bold mb-6 font-[family-name:var(--font-megrim)]" style={{ color: '#080eb4' }}>Log</h1>
 
       <div className="flex border-b border-gray-200 mb-6">
         {Object.keys(characterLogData).map((characterName) => {
@@ -175,9 +185,15 @@ export default function LineLogPage() {
                   ? 'border-b-2 border-blue-500 text-blue-600'
                   : 'text-gray-500 hover:text-gray-700'
               }`}
-              onClick={() => setActiveTab(characterName)}
+              onClick={() => {
+                if (isValidCharacterKey(characterName)) {
+                  setActiveTab(characterName);
+                }
+              }}
             >
-              {characterDisplayNames[characterName] || characterName}
+            {isValidCharacterKey(characterName) 
+              ? characterDisplayNames[characterName] 
+              : characterName}
             </button>
           );
         })}
@@ -210,5 +226,13 @@ export default function LineLogPage() {
         logTitle={selectedLog?.title || ''}
       />
     </div>
+  );
+}
+
+export default function LineLogPage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto p-4">読み込み中...</div>}>
+      <LineLogContent />
+    </Suspense>
   );
 }
