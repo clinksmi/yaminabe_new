@@ -1,14 +1,17 @@
 // src/components/RadarChart.tsx
 'use client';
 
+import { useState } from 'react';
+
 interface RadarChartProps {
   stats: {
     label: string;
-    value: number; // 0-10の値
+    value: number; // 0-18の値
   }[];
 }
 
 export default function RadarChart({ stats }: RadarChartProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   // 7つの頂点の座標を計算（中心が100, 100、半径70）
   const calculatePoints = (values: number[]) => {
     const center = 100;
@@ -18,7 +21,7 @@ export default function RadarChart({ stats }: RadarChartProps) {
 
     return values.map((value, index) => {
       const angle = startAngle + angleStep * index;
-      const radius = (value / 10) * maxRadius;
+      const radius = (value / 18) * maxRadius;
       const x = center + radius * Math.cos(angle);
       const y = center + radius * Math.sin(angle);
       return { x, y };
@@ -30,8 +33,8 @@ export default function RadarChart({ stats }: RadarChartProps) {
   const pathData = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
 
   // 背景の7角形（ガイドライン）
-  const maxPoints = calculatePoints([10, 10, 10, 10, 10, 10, 10]);
-  const guidelines = [2, 4, 6, 8, 10].map(level => {
+  const maxPoints = calculatePoints([18, 18, 18, 18, 18, 18, 18]);
+  const guidelines = [3, 6, 9, 12, 15, 18].map(level => {
     const guidePoints = calculatePoints(Array(7).fill(level));
     return guidePoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ') + ' Z';
   });
@@ -78,7 +81,29 @@ export default function RadarChart({ stats }: RadarChartProps) {
         {/* データポイントの円 */}
         <g fill="#080eb4">
           {points.map((point, index) => (
-            <circle key={index} cx={point.x} cy={point.y} r="3" />
+            <g key={index}>
+              <circle 
+                cx={point.x} 
+                cy={point.y} 
+                r="5"
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                style={{ cursor: 'pointer' }}
+              />
+              {hoveredIndex === index && (
+                <text
+                  x={point.x}
+                  y={point.y - 10}
+                  fontSize="8"
+                  fill="#080eb4"
+                  fontWeight="600"
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                >
+                  {stats[index].value}
+                </text>
+              )}
+            </g>
           ))}
         </g>
         

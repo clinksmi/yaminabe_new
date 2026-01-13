@@ -13,7 +13,7 @@ export interface GalleryImage {
   export const galleryImages: GalleryImage[] = [
     {
       id: 'gal001',
-      src: '/gallery/hutae.jpeg', // ★君が置いたパスとファイル名に合わせてね！
+      src: '/images/top.jpeg', // ★君が置いたパスとファイル名に合わせてね！
       alt: 'サイトトップ画像',
       width: 1920, // 例: 画像の実際の幅
       height: 1080, // 例: 画像の実際の高さ

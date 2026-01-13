@@ -242,7 +242,7 @@ const SearchPage = () => {
             </button>
           </div>
           <p className="text-sm text-gray-500 mt-4">
-            ここを絞り込みボタン押すとポップアップが出てきて条件で絞り込めます。（まだ未実装）
+            ここを絞り込みボタン押すとポップアップが出てきて条件で絞り込めます。
           </p>
         </div>
       </div>

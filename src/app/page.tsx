@@ -87,7 +87,7 @@ const HomePage = () => {
     <div className="container mx-auto p-4 overflow-hidden">
       <section className="text-center my-8">
         <Image
-          src="/images/image-kari.jpeg"
+          src="/images/top.jpeg"
           alt="サイトのメインビジュアル"
           width={1920}
           height={1080}
